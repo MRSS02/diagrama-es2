@@ -1,0 +1,96 @@
+classDiagram
+
+class Criança {
+    String nome
+    int matricula
+    int ano
+    int idade
+    Avaliacao? avaliacao
+    ArrayList<Interesse>? Interesses
+    ArrayList<Assunto>? assuntosDominados
+    int CPF?
+    int telefone?
+    String tipoSangue?
+}
+class Educador {
+    String nome 
+    String cadastroDocente
+    int idade?
+    String nivelFormação
+    ArrayList<int> anosQueEnsina
+}
+
+class RegistroDiário {
+    String content 
+    String data
+    Educador autor
+    Criança estudante
+}
+
+class Avaliaçao {
+    Arraylist<String> avaliaçaoÁreas
+    Criança estudanteAvaliado 
+    String autoAvaliaçao
+    Educador autor
+}
+
+class Interesse {
+    String relatórioProgresso
+    String nome
+    Criança estudanteInteressado
+    Educador CriadorRelatório
+}
+
+class Trimestre {
+    ArrayList<Assunto> Assuntos
+    ArrayList<Atividade> Atividades
+    String dataInicio
+    String dataFim
+    String? observações
+}
+
+class Atividade {
+    ArrayList<Assunto> conteudos
+    ArrayList<Criança> estudantesEnvolvidos
+    String descrição
+    String dataInicio
+    String dataApresentação
+    String? estado
+    String? dados
+    String? avaliaçãoApresentação
+    String? observações
+}
+
+class Assunto {
+    ArrayList<Criança> estudantesAprendendo
+    ArrayList<Criança> estudantesQueDominam
+    String? detalhes
+    String? requerimentosBNCC
+}
+
+class Pergunta {
+    Criança autor
+    Educador quemResponde
+    String conteudoPergunta
+    String dataFormulada
+    String dataRespondida
+    String? assuntoPertencente
+    String? resposta
+    String? observações
+    
+}
+
+Instituicao "1" -- "*" Criança : possui
+Instituicao "1" -- "*" Educador : possui
+Educador "1" -- "*" Pergunta : responde
+Criança "1" -- "*" Pergunta : formula
+Criança "1" -- "*" Atividade : apresenta
+Criança "1" -- "*" Assunto : domina
+Criança "1" -- "1" Avaliaçao : possui
+Criança "1" -- "*" Interesse : possui
+Criança "1" -- "1" Criança : autoavalia
+Educador "*" -- "*" Criança : avalia
+Educador "*" -- "*" RegistroDiário : cria
+Educador "*" -- "*" Trimestre : organiza  
+Trimestre "1" -- "*" Assunto : possui
+Trimestre "1" -- "*" Atividade : possui
